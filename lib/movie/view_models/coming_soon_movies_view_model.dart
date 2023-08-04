@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieflix/movie/models/movie_model.dart';
 import 'package:movieflix/movie/repos/movie_repository.dart';
 
-class PopularMoviesViewModel
+class ComingSoonMoviesViewModel
     extends AutoDisposeAsyncNotifier<List<MovieModel>> {
   late final MovieRepository _movieRepository;
   List<MovieModel> _cache = [];
@@ -17,11 +17,11 @@ class PopularMoviesViewModel
   }
 
   Future<List<MovieModel>> _fetch() async {
-    return await _movieRepository.getPopularMovies();
+    return await _movieRepository.getComingSoonMovies();
   }
 }
 
-final popularMoviesProvider = AsyncNotifierProvider.autoDispose<
-    PopularMoviesViewModel, List<MovieModel>>(
-  () => PopularMoviesViewModel(),
+final comingSoonMoviesProvider = AsyncNotifierProvider.autoDispose<
+    ComingSoonMoviesViewModel, List<MovieModel>>(
+  () => ComingSoonMoviesViewModel(),
 );

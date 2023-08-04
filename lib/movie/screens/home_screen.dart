@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieflix/constants/gaps.dart';
 import 'package:movieflix/constants/sizes.dart';
 import 'package:movieflix/movie/components/MovieBackdrops.dart';
-import 'package:movieflix/movie/components/MoviePoster.dart';
-import 'package:movieflix/movie/view_models/popular_movies_view_model.dart';
+import 'package:movieflix/movie/components/Movies.dart';
+import 'package:movieflix/movie/view_models/coming_soon_movies_view_model.dart';
+import 'package:movieflix/movie/view_models/now_playing_movies_view_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -32,7 +33,27 @@ class HomeScreen extends ConsumerWidget {
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 Gaps.v16,
-                const MovieBackdrops(),
+                SizedBox(
+                  height: 250,
+                  child: ref.watch(nowPlayingMoviesProvider).when(
+                    data: (data) {
+                      return MovieBackdrops(movies: data);
+                    },
+                    error: (error, stackTrace) {
+                      return Center(
+                        child: Text(
+                          'Could not load movies',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    },
+                    loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
+                ),
                 Gaps.v32,
                 Text(
                   'Now in Cinemas',
@@ -42,16 +63,26 @@ class HomeScreen extends ConsumerWidget {
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 Gaps.v16,
-                Container(
-                  width: 150,
-                  height: 150,
-                  color: Colors.teal,
-                ),
-                Gaps.v10,
-                Container(
-                  width: 150,
-                  height: 90,
-                  color: Colors.teal,
+                SizedBox(
+                  height: 250,
+                  child: ref.watch(nowPlayingMoviesProvider).when(
+                    data: (data) {
+                      return Movies(movies: data);
+                    },
+                    error: (error, stackTrace) {
+                      return Center(
+                        child: Text(
+                          'Could not load movies',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    },
+                    loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
                 ),
                 Gaps.v32,
                 Text(
@@ -62,10 +93,26 @@ class HomeScreen extends ConsumerWidget {
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 Gaps.v16,
-                Container(
-                  width: 150,
-                  height: 150,
-                  color: Colors.lightBlue,
+                SizedBox(
+                  height: 250,
+                  child: ref.watch(comingSoonMoviesProvider).when(
+                    data: (data) {
+                      return Movies(movies: data);
+                    },
+                    error: (error, stackTrace) {
+                      return Center(
+                        child: Text(
+                          'Could not load movies',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      );
+                    },
+                    loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ),
                 ),
                 Gaps.v32,
               ],

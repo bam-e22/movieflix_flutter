@@ -3,6 +3,7 @@ class MovieModel {
     required this.id,
     required this.title,
     required this.overview,
+    required this.posterPath,
     required this.backdropPath,
   });
 
@@ -10,11 +11,13 @@ class MovieModel {
       : id = json['id'],
         title = json['title'],
         overview = json['overview'],
+        posterPath = json['poster_path'],
         backdropPath = json['backdrop_path'];
 
   final int id;
   final String title;
   final String overview;
+  final String posterPath;
   final String backdropPath;
 
   @override
