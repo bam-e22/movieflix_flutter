@@ -12,11 +12,11 @@ class MovieBackdrops extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(popularMoviesProvider).when(
-      data: (popularMovies) {
-        return SizedBox(
-          height: height,
-          child: ListView.separated(
+    return SizedBox(
+      height: height,
+      child: ref.watch(popularMoviesProvider).when(
+        data: (popularMovies) {
+          return ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
@@ -30,29 +30,22 @@ class MovieBackdrops extends ConsumerWidget {
             },
             separatorBuilder: (context, index) => Gaps.h20,
             itemCount: popularMovies.length,
-          ),
-        );
-      },
-      error: (error, stackTrace) {
-        print("Could not load movies: $error");
-        return SizedBox(
-          height: height,
-          child: Center(
+          );
+        },
+        error: (error, stackTrace) {
+          return Center(
             child: Text(
               'Could not load movies',
               style: Theme.of(context).textTheme.titleLarge,
             ),
-          ),
-        );
-      },
-      loading: () {
-        return SizedBox(
-          height: height,
-          child: const Center(
+          );
+        },
+        loading: () {
+          return const Center(
             child: CircularProgressIndicator(),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
