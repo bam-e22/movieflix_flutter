@@ -1,12 +1,12 @@
-class PopularMovie {
-  const PopularMovie({
+class MovieModel {
+  const MovieModel({
     required this.id,
     required this.title,
     required this.overview,
     required this.backdropPath,
   });
 
-  PopularMovie.fromJson(Map<String, dynamic> json)
+  MovieModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         title = json['title'],
         overview = json['overview'],
