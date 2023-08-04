@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/home/home_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:movieflix/movie/home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +22,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }
