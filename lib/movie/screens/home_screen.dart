@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieflix/constants/gaps.dart';
 import 'package:movieflix/constants/sizes.dart';
+import 'package:movieflix/movie/components/MovieBackdrops.dart';
+import 'package:movieflix/movie/components/MoviePoster.dart';
+import 'package:movieflix/movie/view_models/popular_movies_view_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -29,11 +32,7 @@ class HomeScreen extends ConsumerWidget {
                       ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 Gaps.v16,
-                Container(
-                  width: 350,
-                  height: 250,
-                  color: Colors.amber,
-                ),
+                const MovieBackdrops(),
                 Gaps.v32,
                 Text(
                   'Now in Cinemas',
