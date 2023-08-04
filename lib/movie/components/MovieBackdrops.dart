@@ -7,12 +7,15 @@ import 'package:movieflix/movie/view_models/popular_movies_view_model.dart';
 class MovieBackdrops extends ConsumerWidget {
   const MovieBackdrops({super.key});
 
+  final double width = 350;
+  final double height = 250;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(popularMoviesProvider).when(
       data: (popularMovies) {
         return SizedBox(
-          height: 250,
+          height: height,
           child: ListView.separated(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -21,8 +24,8 @@ class MovieBackdrops extends ConsumerWidget {
                 posterUrl:
                     "https://image.tmdb.org/t/p/w500/${popularMovies[index].backdropPath}",
                 onTap: () {},
-                width: 350,
-                height: 250,
+                width: width,
+                height: height,
               );
             },
             separatorBuilder: (context, index) => Gaps.h20,
@@ -33,7 +36,7 @@ class MovieBackdrops extends ConsumerWidget {
       error: (error, stackTrace) {
         print("Could not load movies: $error");
         return SizedBox(
-          height: 250,
+          height: height,
           child: Center(
             child: Text(
               'Could not load movies',
@@ -43,9 +46,11 @@ class MovieBackdrops extends ConsumerWidget {
         );
       },
       loading: () {
-        return const SizedBox(
-          height: 250,
-          child: CircularProgressIndicator(),
+        return SizedBox(
+          height: height,
+          child: const Center(
+            child: CircularProgressIndicator(),
+          ),
         );
       },
     );
