@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieflix/constants/gaps.dart';
-import 'package:movieflix/movie/components/MoviePoster.dart';
+import 'package:movieflix/movie/components/movie_poster.dart';
 import 'package:movieflix/movie/models/movie_model.dart';
 
 class Movies extends ConsumerWidget {
@@ -10,11 +10,13 @@ class Movies extends ConsumerWidget {
     this.imageWidth = 150,
     this.imageHeight = 200,
     required this.movies,
+    required this.onTap,
   });
 
   final double imageWidth;
   final double imageHeight;
   final List<MovieModel> movies;
+  final Function(int movieId) onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +29,7 @@ class Movies extends ConsumerWidget {
             MoviePoster(
               posterUrl:
                   "https://image.tmdb.org/t/p/w500/${movies[index].posterPath}",
-              onTap: () {},
+              onTap: () => onTap(movies[index].id),
               width: imageWidth,
               height: imageHeight,
             ),

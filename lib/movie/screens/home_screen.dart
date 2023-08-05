@@ -2,14 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieflix/constants/gaps.dart';
 import 'package:movieflix/constants/sizes.dart';
-import 'package:movieflix/movie/components/MovieBackdrops.dart';
-import 'package:movieflix/movie/components/Movies.dart';
+import 'package:movieflix/movie/components/movie_backdrops.dart';
+import 'package:movieflix/movie/components/movies.dart';
+import 'package:movieflix/movie/screens/detail_screen.dart';
 import 'package:movieflix/movie/view_models/coming_soon_movies_view_model.dart';
 import 'package:movieflix/movie/view_models/now_playing_movies_view_model.dart';
 import 'package:movieflix/movie/view_models/popular_movies_view_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
+
+  void _onMovieTap(BuildContext context, int movieId) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => DetailScreen(
+          movieId: movieId,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,7 +49,10 @@ class HomeScreen extends ConsumerWidget {
                   height: 250,
                   child: ref.watch(popularMoviesProvider).when(
                     data: (data) {
-                      return MovieBackdrops(movies: data);
+                      return MovieBackdrops(
+                        movies: data,
+                        onTap: (movieId) => _onMovieTap(context, movieId),
+                      );
                     },
                     error: (error, stackTrace) {
                       return Center(
@@ -68,7 +82,10 @@ class HomeScreen extends ConsumerWidget {
                   height: 270,
                   child: ref.watch(nowPlayingMoviesProvider).when(
                     data: (data) {
-                      return Movies(movies: data);
+                      return Movies(
+                        movies: data,
+                        onTap: (movieId) => _onMovieTap(context, movieId),
+                      );
                     },
                     error: (error, stackTrace) {
                       return Center(
@@ -98,7 +115,10 @@ class HomeScreen extends ConsumerWidget {
                   height: 250,
                   child: ref.watch(comingSoonMoviesProvider).when(
                     data: (data) {
-                      return Movies(movies: data);
+                      return Movies(
+                        movies: data,
+                        onTap: (movieId) => _onMovieTap(context, movieId),
+                      );
                     },
                     error: (error, stackTrace) {
                       return Center(
