@@ -102,7 +102,7 @@ class HomeScreen extends ConsumerWidget {
                     },
                   ),
                 ),
-                Gaps.v32,
+                Gaps.v16,
                 Text(
                   'Coming soon',
                   style: Theme.of(context)
