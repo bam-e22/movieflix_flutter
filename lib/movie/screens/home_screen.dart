@@ -65,7 +65,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 Gaps.v16,
                 SizedBox(
-                  height: 250,
+                  height: 270,
                   child: ref.watch(nowPlayingMoviesProvider).when(
                     data: (data) {
                       return Movies(movies: data);

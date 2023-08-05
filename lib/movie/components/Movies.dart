@@ -32,12 +32,15 @@ class Movies extends ConsumerWidget {
               height: imageHeight,
             ),
             Gaps.v10,
-            SizedBox(
-              width: imageWidth,
-              child: Text(
-                movies[index].title,
-                style: Theme.of(context).textTheme.titleSmall,
-                overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: SizedBox(
+                width: imageWidth,
+                child: Text(
+                  movies[index].title,
+                  style: Theme.of(context).textTheme.titleSmall,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                ),
               ),
             ),
           ],
