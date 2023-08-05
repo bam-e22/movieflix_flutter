@@ -17,11 +17,13 @@ class PopularMoviesViewModel
   }
 
   Future<List<MovieModel>> _fetch() async {
-    return await _movieRepository.getPopularMovies();
+    final movies = await _movieRepository.getPopularMovies();
+    movies.sort((a, b) => b.popularity.compareTo(a.popularity));
+    return movies;
   }
 }
 
-final popularMoviesProvider = AsyncNotifierProvider.autoDispose<
-    PopularMoviesViewModel, List<MovieModel>>(
+final popularMoviesProvider =
+    AsyncNotifierProvider.autoDispose<PopularMoviesViewModel, List<MovieModel>>(
   () => PopularMoviesViewModel(),
 );

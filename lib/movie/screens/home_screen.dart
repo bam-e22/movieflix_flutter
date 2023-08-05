@@ -6,6 +6,7 @@ import 'package:movieflix/movie/components/MovieBackdrops.dart';
 import 'package:movieflix/movie/components/Movies.dart';
 import 'package:movieflix/movie/view_models/coming_soon_movies_view_model.dart';
 import 'package:movieflix/movie/view_models/now_playing_movies_view_model.dart';
+import 'package:movieflix/movie/view_models/popular_movies_view_model.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -35,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                 Gaps.v16,
                 SizedBox(
                   height: 250,
-                  child: ref.watch(nowPlayingMoviesProvider).when(
+                  child: ref.watch(popularMoviesProvider).when(
                     data: (data) {
                       return MovieBackdrops(movies: data);
                     },

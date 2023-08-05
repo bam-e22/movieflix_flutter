@@ -5,6 +5,8 @@ class MovieModel {
     required this.overview,
     required this.posterPath,
     required this.backdropPath,
+    required this.popularity,
+    required this.releaseDate,
   });
 
   MovieModel.fromJson(Map<String, dynamic> json)
@@ -12,7 +14,9 @@ class MovieModel {
         title = json['title'],
         overview = json['overview'],
         posterPath = json['poster_path'],
-        backdropPath = json['backdrop_path'];
+        backdropPath = json['backdrop_path'],
+        popularity = json['popularity'],
+        releaseDate = json['release_date'];
 
   final int id;
   final String title;
@@ -20,8 +24,11 @@ class MovieModel {
   final String posterPath;
   final String backdropPath;
 
+  final double popularity;
+  final String releaseDate;
+
   @override
   String toString() {
-    return "[$id]\n $title\n $overview\n $backdropPath";
+    return "[$id] $title $releaseDate\n";
   }
 }
